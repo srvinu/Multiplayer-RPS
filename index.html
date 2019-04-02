@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Rock Paper Scissors</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Fascinate+Inline" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
+
+    </head>
+
+<body>
+        <div class="jumbotron" style="padding: 15px;">
+          <h1 style="font-family: 'Fascinate Inline', cursive; text-align: center">Rock ~ Paper ~ Scissors</h1>
+        </div>
+        <div class="jumbotron" style="padding: 15px; display:none ;background-color: #252438" id="p1-result" >
+            <h1 style="font-family: 'Fugaz One', cursive; text-align: center; color: #F57A00">Player One Wins</h1>
+            <button class="restartbtn" id="restartGame"> Restart Game </button>
+          </div>
+          <div class="jumbotron" style="padding: 15px; display:none ;background-color: #252438" id="tieResult" >
+              <h1 style="font-family: 'Fugaz One', cursive; text-align: center; color: #F57A00">It's a Tie !</h1>
+            </div>
+          <div class="jumbotron" style="padding: 15px; display:none ;background-color: #252438" id="gameOn" >
+              <h1 style="font-family: 'Fugaz One', cursive; text-align: center; color: #F57A00">There is a Game inprogress ! <br>Please re-visit after few minutes</h1>
+            </div>
+          <div class="jumbotron" style="padding: 15px; display:none ;background-color: #252438" id="p2-result" >
+              <h1 style="font-family: 'Fugaz One', cursive; text-align: center; color: #F57A00">Player Two Wins</h1>
+              <button class="restartbtn" id="restartGame"> Restart Game </button>
+            </div>
+
+<div class="container" id="playCard" >
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6" >
+        <div class="card text-white bg-info mb-3" style="max-width: 15rem;">
+            <div class="card-body" id="p1-card" style="display: block">
+              <h4 class="card-title box-formating" id="p1-headScore">Player-1 Waiting</h4>
+              <h4 class="card-text box-formating">Win: <span id="p1-wscore">0</span></h4>
+              <h4 class="card-text box-formating">Lose: <span id="p1-lscore">0</span></h4>
+            </div>
+          </div>
+        </div>
+
+  <div class="col-sm-6 col-md-6 col-lg-6" >
+      <div class="card text-white bg-info mb-3" style="max-width: 15rem; margin-left: 190px">
+          <div class="card-body" id="p2-card" style="display: block" >
+            <h4 class="card-title box-formating" id="p2-headScore">Player-2 Waiting</h4>
+            <h4 class="card-text box-formating">Win:  <span id="p2-wscore">0</span></h4>
+            <h4 class="card-text box-formating">Lose: <span id="p2-lscore">0</span></h4>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="container here" id="player-container" style="display: block">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <input type="text" id="p1-name">
+          <input type="submit" class="name-submit" id="p1-nameSubmit" value="Player 1 Name">
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <input type="text" id="p2-name">
+            <input type="submit" class="name-submit" id="p2-nameSubmit" value="Player 2 Name">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6" id="p1Img">
+          <img class="p1-choice" data-choice="rock" id="p1-rock" src="./assets/img/rock.png">
+          <img class="p1-choice" data-choice="paper" id="p1-paper" src="./assets/img/paper.png">
+          <img class="p1-choice" data-choice="scissor" id="p1-scissor" src="./assets/img/scissors.png">
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6" id="p2Img">
+            <img class="p2-choice" data-choice="rock" id="p2-rock" src="./assets/img/rock.png">
+            <img class="p2-choice" data-choice="paper" id="p2-paper" src="./assets/img/paper.png">
+            <img class="p2-choice" data-choice="scissor" id="p2-scissor" src="./assets/img/scissors.png">
+          </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="assets/js/rps_logic.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+</html>
