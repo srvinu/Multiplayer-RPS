@@ -37,43 +37,7 @@ var gameCycle;
 var sessionP1 = sessionStorage.getItem("p1name");
 var sessionP2 = sessionStorage.getItem("p2name");
 
-// console.log(sessionP1, sessionP2);
-
-
-
-playerOneRef.on('value',function(snapshot){
-  var dbValues = snapshot.val();
-  // console.log(dbValues)
-    p1Name = dbValues.name;
-    p1Win = dbValues.win;
-    p1Lose = dbValues.lose;
-    p1Active = dbValues.active
-  // console.log(p1Lose, p1Name, p1Win)
-  if (p1Active) {
-  $('#p1-headScore').text(p1Name+"'s Score")
-  $('#p1-wscore').text(p1Win);
-  $("#p1-lscore").text(p1Lose);
-  } else {
-    $('#p1-container').css('display', 'block');
-  }
-  });
-
-  playerTwoRef.on('value',function(snapshot){
-  var dbValues = snapshot.val();
-    p2Name = dbValues.name;
-    p2Win = dbValues.win;
-    p2Lose = dbValues.lose;
-    p2Active = dbValues.active
-  // console.log(p1Lose, p1Name, p1Win)
-  if (p2Active) {
-  $('#p2-headScore').text(p2Name+"'s Score")
-  $('#p2-wscore').text(p2Win);
-  $("#p2-lscore").text(p2Lose);
-  } else {
-    $('#p2-container').css('display', 'block');
-  }
-  });
-
+// console.log(p1Name, p2Name);
   gameResult.on('value',function(snapshot){
   var dbValues = snapshot.val();
     gameNumber = dbValues.game;
@@ -95,12 +59,42 @@ playerOneRef.on('value',function(snapshot){
     //   console.log("do nothing")
     // }
   });
-  playerTurn.on('value',function(snapshot){
+
+// resetFireBaseValues()
+    playerOneRef.on('value',function(snapshot){
+    var dbValues = snapshot.val();
+    // console.log(dbValues)
+      p1Name = dbValues.name;
+      p1Win = dbValues.win;
+      p1Lose = dbValues.lose;
+    // console.log(p1Lose, p1Name, p1Win)
+    if (p1Name != "" ) {
+    $('#p1-headScore').text(p1Name+"'s Score")
+    $('#p1-wscore').text(p1Win);
+    $("#p1-lscore").text(p1Lose);
+    }
+    });
+
+    playerTwoRef.on('value',function(snapshot){
+    var dbValues = snapshot.val();
+      p2Name = dbValues.name;
+      p2Win = dbValues.win;
+      p2Lose = dbValues.lose;
+    // console.log(p1Lose, p1Name, p1Win)
+    if (p2Name != "" ) {
+    $('#p2-headScore').text(p2Name+"'s Score")
+    $('#p2-wscore').text(p2Win);
+    $("#p2-lscore").text(p2Lose);
+    }
+    });
+    playerTurn.on('value',function(snapshot){
     var dbValues = snapshot.val();
       turn = dbValues.turn;
     });
-resetFireBaseValues()
-
+    gameResult.on('value',function(snapshot){
+    var dbValues = snapshot.val();
+      gameNumber = dbValues.game;
+    });
 
     // Enter Player Name
     $("#p1-nameSubmit").on('click', function(event){
@@ -109,15 +103,11 @@ resetFireBaseValues()
       sessionStorage.setItem("p1name", p1Name);
       $("#p1-nameSubmit").css('display', 'none');
       $('#p1-name').css('display', 'none');
-      $("#p2-nameSubmit").css('display', 'none');
-      $('#p2-name').css('display', 'none');
       playerOneRef.update({
         name: p1Name,
         win: 0,
         lose: 0,
-        active: true,
         choice: ""
-
       });
       // $('#p1-result').show();
     });
@@ -125,21 +115,17 @@ resetFireBaseValues()
       event.preventDefault();
       p2Name = $('#p2-name').val().trim();
       sessionStorage.setItem("p2name", p2Name);
-      $("#p1-nameSubmit").css('display', 'none');
-      $('#p1-name').css('display', 'none');
       $("#p2-nameSubmit").css('display', 'none');
       $('#p2-name').css('display', 'none');
       playerTwoRef.update({
         name: p2Name,
         win: 0,
         lose: 0,
-        active: true,
         choice: ""
       });
       gameResult.update({gameCycle: true})
       // $('#p1-result').show();
     });
-    console.log(sessionP1, sessionP2);
 //// On Click Rock Paper Scissors
     $('.p1-choice').on('click', function(event){
       console.log(turn)
@@ -157,13 +143,11 @@ resetFireBaseValues()
 
       }
     });
-    $('.p2-choice').on('click', function(event) {
-      console.log(turn)
+    $('.p2-choice').on('click', function(event){
       if (turn === 2){
-        console.log(turn)
         p2Choice = $(this).data('choice');
         p2ID = $(this).attr('id');
-        console.log(p2ID+"--> p2Choice")
+        console.log(p2ID+"--> p2id")
         // showHideButtons(p2ID);
         console.log(p2Choice);
         playerTurn.update({turn: 1});

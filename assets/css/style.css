@@ -94,3 +94,22 @@ body {
   left: 130px;
   margin-left: 20px;
 }
+
+
+.playBtn {
+    background-color: #F57A00;
+    border: none;
+    color: black;
+    padding: 1px 1px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px 2px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 19px;
+  }
+
+.playBtn:hover {
+    background-color: white;
+  }
